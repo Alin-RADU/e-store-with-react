@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { signInWithGoogle } from '../../../api/firebase/firebase';
+
 import InputForm from '../../UI/InputForm/InputForm';
 import Button from '../../UI/Button/Button';
 
@@ -48,7 +50,12 @@ class SignIn extends Component {
             label="password"
             required
           />
-          <Button type="submit">Sign in</Button>
+          <div className="buttons">
+            <Button type="submit">Sign in</Button>
+            <Button onClick={signInWithGoogle} isGoogleSignIn>
+              Sign in with GOOGLE
+            </Button>
+          </div>
         </form>
       </div>
     );
