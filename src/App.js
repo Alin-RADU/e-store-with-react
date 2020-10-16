@@ -6,7 +6,7 @@ import ShopPage from './pages/ShopPage/ShopPage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import Header from './components/Header/Header';
 
-import { auth } from './api/firebase/firebase';
+import { auth, createUserProfileDocument } from './api/firebase/firebase';
 
 import './App.css';
 
@@ -16,9 +16,23 @@ class App extends Component {
   unsubscribeFormAuth = null;
 
   componentDidMount() {
-    this.unsubscribeFormAuth = auth.onAuthStateChanged((user) =>
-      this.setState({ currentUser: user })
-    );
+    this.unsubscribeFormAuth = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot((snapShot) => {
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data(),
+            },
+          });
+          console.log(this.state);
+        });
+      }
+
+      this.setState({ currentUser: userAuth });
+    });
   }
 
   componentWillUnmount() {
@@ -26,7 +40,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.currentUser);
     return (
       <div className="body">
         <Header currentUser={this.state.currentUser} />
