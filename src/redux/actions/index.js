@@ -1,0 +1,1 @@
+export { setCurrentUser } from './userAction';

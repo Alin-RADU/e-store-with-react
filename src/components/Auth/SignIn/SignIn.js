@@ -46,7 +46,7 @@ class SignIn extends Component {
             value={this.state.email}
             handleChange={this.onInputChangeHandler}
             label="email"
-            autoComplete="off"
+            // autoComplete="off"
             required
           />
           <InputForm
@@ -59,7 +59,7 @@ class SignIn extends Component {
           />
           <div className="buttons">
             <Button type="submit">Sign in</Button>
-            <Button onClick={signInWithGoogle} isGoogleSignIn>
+            <Button type="button" onClick={signInWithGoogle} isGoogleSignIn>
               Sign in with GOOGLE
             </Button>
           </div>
