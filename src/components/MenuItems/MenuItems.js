@@ -10,18 +10,21 @@ class MenuItems extends Component {
       {
         title: 'hats',
         imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
+        size: '',
         id: 1,
         linkUrl: 'hats',
       },
       {
         title: 'jackets',
         imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
+        size: '',
         id: 2,
         linkUrl: 'jackets',
       },
       {
         title: 'sneakers',
         imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
+        size: '',
         id: 3,
         linkUrl: 'sneakers',
       },

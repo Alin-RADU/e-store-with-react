@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import HomePage from './pages/HomePage/HomePage';
@@ -16,6 +16,7 @@ class App extends Component {
   unsubscribeFormAuth = null;
 
   componentDidMount() {
+    console.log('setCurrentUser');
     const { setCurrentUser } = this.props;
 
     this.unsubscribeFormAuth = auth.onAuthStateChanged(async (userAuth) => {
@@ -38,6 +39,13 @@ class App extends Component {
     this.unsubscribeFormAuth();
   }
 
+  guardSignInRoute = () => {
+    if (!this.props.currentUser) {
+      return <AuthPage />;
+    }
+    return <Redirect to="/" />;
+  };
+
   render() {
     return (
       <div className="body">
@@ -45,12 +53,18 @@ class App extends Component {
         <Switch>
           <Route path="/" exact component={HomePage} />
           <Route path="/shop" exact component={ShopPage} />
-          <Route path="/auth" exact component={AuthPage} />
+          <Route path="/auth" exact render={this.guardSignInRoute} />
         </Switch>
       </div>
     );
   }
 }
+
+const mapStateToProps = ({ user }) => {
+  return {
+    currentUser: user.currentUser,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -58,4 +72,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

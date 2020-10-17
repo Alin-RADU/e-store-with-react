@@ -2,13 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { ReactComponent as Logo } from '../../assets/images/crown.svg';
+import { ReactComponent as Logo } from '../../assets/svg/crown.svg';
+import CartIcon from '../Cart/CartIcon/CartIcon';
+import CartDropdown from '../Cart/CartDropdown/CartDropdown';
 
 import { auth } from '../../api/firebase/firebase';
 
 import './Header.scss';
 
-const Header = ({ currentUser }) => {
+const Header = ({ currentUser, cartShowToggle }) => {
   const renderAuthLink = () => {
     if (currentUser) {
       return (
@@ -36,14 +38,20 @@ const Header = ({ currentUser }) => {
           CONTACT
         </Link>
         {renderAuthLink()}
+        <CartIcon />
       </div>
+      {cartShowToggle ? <CartDropdown /> : null}
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({
+  user: { currentUser },
+  cartShowToggle: { hidden },
+}) => {
   return {
-    currentUser: state.user.currentUser,
+    currentUser,
+    cartShowToggle: hidden,
   };
 };
 
