@@ -16,7 +16,6 @@ class App extends Component {
   unsubscribeFormAuth = null;
 
   componentDidMount() {
-    console.log('setCurrentUser');
     const { setCurrentUser } = this.props;
 
     this.unsubscribeFormAuth = auth.onAuthStateChanged(async (userAuth) => {

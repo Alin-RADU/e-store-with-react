@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import CollectionPreview from '../../components/CollectionPreview/CollectionPreview';
 
-import SHOP_DATA from './shopData';
+import SHOP_DATA from '../../assets/shopData';
 
 class ShopPage extends Component {
   state = { collections: SHOP_DATA };
