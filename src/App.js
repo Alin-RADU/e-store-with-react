@@ -5,9 +5,11 @@ import { connect } from 'react-redux';
 import HomePage from './pages/HomePage/HomePage';
 import ShopPage from './pages/ShopPage/ShopPage';
 import AuthPage from './pages/AuthPage/AuthPage';
+import CheckoutPage from './pages/CheckoutPage/CheckoutPage';
 import Header from './components/Header/Header';
 
 import * as actions from './redux/actions/index';
+import { selectCurrentUser } from './redux/selectors/usersSelectors';
 import { auth, createUserProfileDocument } from './api/firebase/firebase';
 
 import './App.css';
@@ -53,15 +55,16 @@ class App extends Component {
           <Route path="/" exact component={HomePage} />
           <Route path="/shop" exact component={ShopPage} />
           <Route path="/auth" exact render={this.guardSignInRoute} />
+          <Route path="/checkout" component={CheckoutPage} />
         </Switch>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ user }) => {
+const mapStateToProps = (state) => {
   return {
-    currentUser: user.currentUser,
+    currentUser: selectCurrentUser(state),
   };
 };
 
