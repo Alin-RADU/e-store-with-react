@@ -28,4 +28,21 @@
     margin-left: auto;
     font-size: 32px;
   }
+
+  button {
+    margin-left: auto;
+    margin-top: 30px;
+  }
+
+  .test-warning {
+    margin-left: auto;
+    text-align: right;
+    margin-top: 30px;
+    margin-top: 40px;
+    font-size: 12px;
+    color: red;
+    padding: 5px;
+    border-bottom: 1px solid darkgrey;
+    border-top: 1px solid darkgrey;
+  }
 }

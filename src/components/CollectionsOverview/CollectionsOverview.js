@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import CollectionPreview from '../../components/CollectionPreview/CollectionPreview';
+import CollectionPreview from '../CollectionPreview/CollectionPreview';
 
-import { selectShopCollections } from '../../redux/selectors/shopSelectors';
+import { selectShopForPreview } from '../../redux/selectors/shopSelectors';
 
-import './CollectionOverview.scss';
+import './CollectionsOverview.scss';
 
-const CollectionOverview = ({ collections }) => {
+const CollectionsOverview = ({ collections }) => {
+  console.log(collections);
   const renderCollections = () => {
     return collections.map(({ id, ...otherCollectionProps }) => {
       return <CollectionPreview key={id} {...otherCollectionProps} />;
@@ -18,8 +19,8 @@ const CollectionOverview = ({ collections }) => {
 
 const mapStateToProps = (state) => {
   return {
-    collections: selectShopCollections(state),
+    collections: selectShopForPreview(state),
   };
 };
 
-export default connect(mapStateToProps)(CollectionOverview);
+export default connect(mapStateToProps)(CollectionsOverview);
