@@ -53,8 +53,8 @@ class App extends Component {
         <Header />
         <Switch>
           <Route path="/" exact component={HomePage} />
-          <Route path="/shop" exact component={ShopPage} />
-          <Route path="/auth" exact render={this.guardSignInRoute} />
+          <Route path="/shop" component={ShopPage} />
+          <Route path="/auth" render={this.guardSignInRoute} />
           <Route path="/checkout" component={CheckoutPage} />
         </Switch>
       </div>

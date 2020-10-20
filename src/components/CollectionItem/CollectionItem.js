@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import * as actions from '../../../redux/actions/index';
+import * as actions from '../../redux/actions/index';
 
-import Button from '../../UI/Button/Button';
+import Button from '../UI/Button/Button';
 
 import './CollectionItem.scss';
 
