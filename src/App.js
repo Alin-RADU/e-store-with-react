@@ -9,13 +9,8 @@ import CheckoutPage from './pages/CheckoutPage/CheckoutPage';
 import Header from './components/Header/Header';
 
 import * as actions from './redux/actions/index';
-import {
-  auth,
-  createUserProfileDocument,
-  addCollectionAndDocuments,
-} from './api/firebase/firebase';
+import { auth, createUserProfileDocument } from './api/firebase/firebase';
 import { selectCurrentUser } from './redux/selectors/usersSelectors';
-import { selectShopForPreview } from './redux/selectors/shopSelectors';
 
 import './App.css';
 
@@ -23,7 +18,7 @@ class App extends Component {
   unsubscribeFormAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser, collectionsArray } = this.props;
+    const { setCurrentUser } = this.props;
 
     this.unsubscribeFormAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
@@ -36,12 +31,6 @@ class App extends Component {
           });
         });
       }
-
-      setCurrentUser(userAuth);
-      // addCollectionAndDocuments(
-      //   'collections',
-      //   collectionsArray.map(({ title, items }) => ({ title, items }))
-      // );
     });
   }
 
@@ -74,7 +63,6 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     currentUser: selectCurrentUser(state),
-    collectionsArray: selectShopForPreview(state),
   };
 };
 
