@@ -6,7 +6,6 @@ import CollectionItem from '../CollectionItem/CollectionItem';
 import './CollectionPreview.scss';
 
 const CollectionPreview = ({ title, items, routeName, match, history }) => {
-  console.log('routename---', routeName);
   const renderItems = () => {
     return items
       .filter((item, idx) => idx < 4)
