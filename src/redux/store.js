@@ -5,9 +5,6 @@ import thunk from 'redux-thunk';
 
 import rootReducer from './reducers/index';
 
-let composeEnhancers;
-const middlewares = [thunk];
-
 const logger = createLogger({
   collapsed: true,
   diff: true,
@@ -20,13 +17,18 @@ const logger = createLogger({
   },
 });
 
+const composeEnhancers =
+  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+        trace: true,
+        traceLimit: 25,
+      })
+    : compose;
+
+const middlewares = [thunk];
+
 if (process.env.NODE_ENV === 'development') {
   middlewares.push(logger);
-  composeEnhancers =
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-      trace: true,
-      traceLimit: 25,
-    }) || compose;
 }
 
 export const store = createStore(
