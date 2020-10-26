@@ -1,14 +1,12 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { persistStore } from 'redux-persist';
 import { createLogger } from 'redux-logger';
+import thunk from 'redux-thunk';
 
 import rootReducer from './reducers/index';
 
-const composeEnhancers =
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-    trace: true,
-    traceLimit: 25,
-  }) || compose;
+let composeEnhancers;
+const middlewares = [thunk];
 
 const logger = createLogger({
   collapsed: true,
@@ -22,7 +20,14 @@ const logger = createLogger({
   },
 });
 
-const middlewares = [logger];
+if (process.env.NODE_ENV === 'development') {
+  middlewares.push(logger);
+  composeEnhancers =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+      trace: true,
+      traceLimit: 25,
+    }) || compose;
+}
 
 export const store = createStore(
   rootReducer,
@@ -30,5 +35,3 @@ export const store = createStore(
 );
 
 export const persistor = persistStore(store);
-
-// composeEnhancers(applyMiddleware(...middlewares))

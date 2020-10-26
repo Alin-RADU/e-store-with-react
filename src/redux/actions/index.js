@@ -5,4 +5,4 @@ export {
   removeItemCart,
   clearItemCart,
 } from './cartAction';
-export { updateCollections } from './shopAction';
+export { fetchCollectionsAsync } from './shopAction';
