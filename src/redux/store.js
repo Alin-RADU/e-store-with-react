@@ -1,4 +1,5 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { persistStore } from 'redux-persist';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
@@ -17,23 +18,15 @@ const logger = createLogger({
   },
 });
 
-const composeEnhancers =
-  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-        trace: true,
-        traceLimit: 25,
-      })
-    : compose;
-
 const middlewares = [thunk];
 
 if (process.env.NODE_ENV === 'development') {
   middlewares.push(logger);
 }
 
-export const store = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(...middlewares))
-);
+const enhancers = applyMiddleware(...middlewares);
+const composedEnhancers = composeWithDevTools(...enhancers);
+
+export const store = createStore(rootReducer, composedEnhancers);
 
 export const persistor = persistStore(store);
