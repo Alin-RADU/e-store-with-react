@@ -23,8 +23,9 @@ const middlewares = [thunk];
 if (process.env.NODE_ENV === 'development') {
   middlewares.push(logger);
 }
+const middlewareEnhancer = applyMiddleware(...middlewares);
 
-const enhancers = applyMiddleware(...middlewares);
+const enhancers = [middlewareEnhancer];
 const composedEnhancers = composeWithDevTools(...enhancers);
 
 export const store = createStore(rootReducer, composedEnhancers);
