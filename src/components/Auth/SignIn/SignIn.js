@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
 import { auth, signInWithGoogle } from '../../../api/firebase/firebase';
 
@@ -7,66 +7,65 @@ import Button from '../../UI/Button/Button';
 
 import './SignIn.scss';
 
-class SignIn extends Component {
-  state = {
+const SignIn = () => {
+  const [userCredentials, setUserCredentials] = useState({
     email: '',
     password: '',
-  };
+  });
 
-  onFormSubmitHandler = async (event) => {
+  const { email, password } = userCredentials;
+
+  const formSubmitHandler = async (event) => {
     event.preventDefault();
-    const { email, password } = this.state;
 
     try {
       await auth.signInWithEmailAndPassword(email, password);
-      this.setState({ email: '', password: '' });
+      setUserCredentials({ email: '', password: '' });
     } catch (error) {
       console.log(error);
     }
   };
 
-  onInputChangeHandler = (event) => {
+  const inputChangeHandler = (event) => {
     const { value, name } = event.target;
-    this.setState({ [name]: value });
+    setUserCredentials({ ...userCredentials, [name]: value });
   };
 
-  render() {
-    return (
-      <div className="sign-in">
-        <h2>I already have an account</h2>
-        <span>Sign in with your email and password</span>
-        <form
-          onSubmit={(event) => {
-            this.onFormSubmitHandler(event);
-          }}
-        >
-          <InputForm
-            name="email"
-            type="email"
-            value={this.state.email}
-            handleChange={this.onInputChangeHandler}
-            label="email"
-            // autoComplete="off"
-            required
-          />
-          <InputForm
-            name="password"
-            type="password"
-            value={this.state.password}
-            handleChange={this.onInputChangeHandler}
-            label="password"
-            required
-          />
-          <div className="buttons">
-            <Button type="submit">Sign in</Button>
-            <Button type="button" onClick={signInWithGoogle} isGoogleSignIn>
-              Sign in with GOOGLE
-            </Button>
-          </div>
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="sign-in">
+      <h2>I already have an account</h2>
+      <span>Sign in with your email and password</span>
+      <form
+        onSubmit={(event) => {
+          formSubmitHandler(event);
+        }}
+      >
+        <InputForm
+          name="email"
+          type="email"
+          value={email}
+          handleChange={inputChangeHandler}
+          label="email"
+          // autoComplete="off"
+          required
+        />
+        <InputForm
+          name="password"
+          type="password"
+          value={password}
+          handleChange={inputChangeHandler}
+          label="password"
+          required
+        />
+        <div className="buttons">
+          <Button type="submit">Sign in</Button>
+          <Button type="button" onClick={signInWithGoogle} isGoogleSignIn>
+            Sign in with GOOGLE
+          </Button>
+        </div>
+      </form>
+    </div>
+  );
+};
 
 export default SignIn;
