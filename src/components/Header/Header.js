@@ -7,7 +7,7 @@ import { ReactComponent as Logo } from '../../assets/svg/crown.svg';
 import CartIcon from '../Cart/CartIcon/CartIcon';
 import CartDropdown from '../Cart/CartDropdown/CartDropdown';
 
-import { selectCurrentUser } from '../../redux/selectors/usersSelectors';
+import { selectCurrentUser } from '../../redux/selectors/userSelectors';
 import { selectCartHidden } from '../../redux/selectors/cartSelectors';
 
 import { auth } from '../../api/firebase/firebase';
@@ -44,7 +44,7 @@ const Header = ({ currentUser, cartShowToggle }) => {
         {renderAuthLink()}
         <CartIcon />
       </div>
-      {cartShowToggle ? <CartDropdown /> : null}
+      {cartShowToggle && <CartDropdown />}
     </div>
   );
 };

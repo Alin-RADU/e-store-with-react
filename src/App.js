@@ -9,35 +9,20 @@ import CheckoutPage from './pages/CheckoutPage/CheckoutPage';
 import Header from './components/Header/Header';
 
 import * as actions from './redux/actions/index';
-import { auth, createUserProfileDocument } from './api/firebase/firebase';
-import { selectCurrentUser } from './redux/selectors/usersSelectors';
+// import { auth, createUserProfileDocument } from './api/firebase/firebase';
+import { selectCurrentUser } from './redux/selectors/userSelectors';
 
 import './App.css';
 
 class App extends Component {
-  unsubscribeFormAuth = null;
+  unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
-
-    this.unsubscribeFormAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-
-        userRef.onSnapshot((snapShot) => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data(),
-          });
-        });
-      }
-
-      setCurrentUser(userAuth);
-    });
+    this.unsubscribeFromAuth = this.props.onSetCurrentUser();
   }
 
   componentWillUnmount() {
-    this.unsubscribeFormAuth();
+    this.unsubscribeFromAuth();
   }
 
   guardSignInRoute = () => {
@@ -70,7 +55,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setCurrentUser: (user) => dispatch(actions.setCurrentUser(user)),
+    onSetCurrentUser: () => dispatch(actions.setCurrentUserAsync()),
   };
 };
 

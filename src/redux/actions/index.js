@@ -1,4 +1,4 @@
-export { setCurrentUser } from './userAction';
+export { setCurrentUserAsync } from './userAction';
 export {
   toogleCartHidden,
   addItemCart,
