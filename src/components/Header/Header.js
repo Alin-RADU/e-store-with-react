@@ -11,14 +11,21 @@ import { selectCurrentUser } from '../../redux/selectors/userSelectors';
 import { selectCartHidden } from '../../redux/selectors/cartSelectors';
 
 import { auth } from '../../api/firebase/firebase';
+import * as actions from '../../redux/actions/index';
 
 import './Header.scss';
 
-const Header = ({ currentUser, cartShowToggle }) => {
+const Header = ({ currentUser, cartShowToggle, onClearCart }) => {
   const renderAuthLink = () => {
     if (currentUser) {
       return (
-        <div className="option" onClick={() => auth.signOut()}>
+        <div
+          className="option"
+          onClick={() => {
+            auth.signOut();
+            onClearCart();
+          }}
+        >
           SIGN OUT
         </div>
       );
@@ -54,4 +61,8 @@ const mapStateToProps = createStructuredSelector({
   cartShowToggle: selectCartHidden,
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = (dispatch) => ({
+  onClearCart: () => dispatch(actions.clearAllItemsFromCart()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
