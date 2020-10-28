@@ -23,6 +23,15 @@
     }
   }
 
+  .fade-exit {
+    opacity: 1;
+  }
+
+  .fade-exit-active {
+    opacity: 0;
+    transition: opacity 0.15s ease-out;
+  }
+
   .total {
     margin-top: 30px;
     margin-left: auto;
@@ -39,7 +48,7 @@
     text-align: right;
     margin-top: 30px;
     margin-top: 40px;
-    font-size: 12px;
+    font-size: 16px;
     color: red;
     padding: 5px;
     border-bottom: 1px solid darkgrey;

@@ -8,24 +8,51 @@
   border: 1px solid black;
   background-color: white;
   top: 90px;
-  right: 40px;
+  right: 60px;
   z-index: 5;
   text-align: center;
 
-  .empty-message {
-    font-size: 18px;
-    margin: 50px;
+  &.fade-slide-enter-active {
+    animation: show 0.45s ease-out forwards;
+  }
+  &.fade-slide-exit {
+    animation: close 0.45s ease-out forwards;
   }
 
-  .cart-items {
-    height: 240px;
-    display: flex;
-    flex-direction: column;
-    overflow: scroll;
+  @media (max-width: 600px) {
+    top: 20%;
+    right: 20%;
+    width: 60%;
+    height: 60%;
   }
-
   button {
     margin-top: 15px;
     width: 100%;
+  }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+    transform: translateX(130%);
+  }
+  50% {
+    opacity: 0.3;
+    transform: translateX(-15%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes close {
+  0% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(130%);
   }
 }

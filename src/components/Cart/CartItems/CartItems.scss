@@ -1,0 +1,16 @@
+.cart-items {
+  height: 240px;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+
+  @media (max-width: 600px) {
+    width: 100%;
+    height: 80%;
+  }
+
+  .empty-message {
+    font-size: 18px;
+    margin: 50px;
+  }
+}

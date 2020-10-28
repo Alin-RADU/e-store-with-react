@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import TransitionGroup from 'react-transition-group/TransitionGroup';
+import CSSTransition from 'react-transition-group/CSSTransition';
 
 import CheckoutItem from '../../components/CheckoutItem/CheckoutItem';
 import StripeCheckoutButton from '../../components/Stripe/StripeButton/StripeButton';
@@ -15,7 +17,9 @@ import './CheckoutPage.scss';
 const CheckoutPage = ({ cartItems, cartPricesSum }) => {
   const renderItems = () =>
     cartItems.map((cartItem) => (
-      <CheckoutItem key={cartItem.id} cartItem={cartItem} />
+      <CSSTransition key={cartItem.id} classNames="fade" timeout={300}>
+        <CheckoutItem cartItem={cartItem} />
+      </CSSTransition>
     ));
 
   return (
@@ -37,7 +41,9 @@ const CheckoutPage = ({ cartItems, cartPricesSum }) => {
           <span>Remove</span>
         </div>
       </div>
-      {renderItems()}
+      <TransitionGroup style={{ width: '100%' }}>
+        {renderItems()}
+      </TransitionGroup>
       <div className="total">TOTAL: ${cartPricesSum}</div>
       <StripeCheckoutButton price={cartPricesSum} />
       <div className="test-warning">
