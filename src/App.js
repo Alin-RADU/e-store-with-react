@@ -8,15 +8,14 @@ import ShopPage from './pages/ShopPage/ShopPage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import CheckoutPage from './pages/CheckoutPage/CheckoutPage';
 import Header from './components/Header/Header';
-import CartDropdown from './components/Cart/CartDropdown/CartDropdown';
 
 import * as actions from './redux/actions/index';
 import { selectCurrentUser } from './redux/selectors/userSelectors';
 import { selectCartHidden } from './redux/selectors/cartSelectors';
 
-import './App.css';
+import './App.scss';
 
-const App = ({ currentUser, cartShowToggle, onSetCurrentUser }) => {
+const App = ({ currentUser, onSetCurrentUser }) => {
   useEffect(() => {
     const unsubscribeFromAuth = onSetCurrentUser();
     return () => unsubscribeFromAuth();
@@ -32,7 +31,6 @@ const App = ({ currentUser, cartShowToggle, onSetCurrentUser }) => {
   return (
     <div className="body">
       <Header />
-      <CartDropdown />
       <Switch>
         <Route path="/" exact component={HomePage} />
         <Route path="/shop" component={ShopPage} />

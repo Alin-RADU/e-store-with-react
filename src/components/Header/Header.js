@@ -5,17 +5,16 @@ import { createStructuredSelector } from 'reselect';
 
 import { ReactComponent as Logo } from '../../assets/svg/crown.svg';
 import CartIcon from '../Cart/CartIcon/CartIcon';
-// import CartDropdown from '../Cart/CartDropdown/CartDropdown';
+import CartDropdown from '../Cart/CartDropdown/CartDropdown';
 
 import { selectCurrentUser } from '../../redux/selectors/userSelectors';
-// import { selectCartHidden } from '../../redux/selectors/cartSelectors';
 
 import { auth } from '../../api/firebase/firebase';
 import * as actions from '../../redux/actions/index';
 
 import './Header.scss';
 
-const Header = ({ currentUser, cartShowToggle, onClearCart }) => {
+const Header = ({ currentUser, onClearCart }) => {
   const renderAuthLink = () => {
     if (currentUser) {
       return (
@@ -51,14 +50,13 @@ const Header = ({ currentUser, cartShowToggle, onClearCart }) => {
         {renderAuthLink()}
         <CartIcon />
       </div>
-      {/* {cartShowToggle && <CartDropdown />} */}
+      <CartDropdown />
     </div>
   );
 };
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
-  // cartShowToggle: selectCartHidden,
 });
 
 const mapDispatchToProps = (dispatch) => ({

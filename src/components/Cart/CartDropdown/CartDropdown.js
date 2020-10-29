@@ -18,7 +18,7 @@ const ANIMATION_TIMING = {
 };
 
 const CartDropdown = ({ history, dispatch, showCartToggle }) => {
-  const renderBackdrop = () => (
+  const renderCart = () => (
     <CSSTransition
       mountOnEnter
       unmountOnExit
@@ -41,7 +41,7 @@ const CartDropdown = ({ history, dispatch, showCartToggle }) => {
   return (
     <React.Fragment>
       <Backdrop show={showCartToggle} />
-      {renderBackdrop()}
+      {renderCart()}
     </React.Fragment>
   );
 };
