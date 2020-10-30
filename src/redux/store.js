@@ -28,7 +28,7 @@ const middlewareEnhancer = applyMiddleware(...middlewares);
 const enhancers = [middlewareEnhancer];
 
 const composedEnhancers =
-  process.env.NODE_ENV === 'production' &&
+  process.env.NODE_ENV === 'development' &&
   typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === 'object'
     ? composeWithDevTools({ trace: true, traceLimit: 25 })(...enhancers)
     : compose(...enhancers);
