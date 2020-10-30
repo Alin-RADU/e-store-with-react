@@ -28,7 +28,7 @@ const middlewareEnhancer = applyMiddleware(...middlewares);
 const enhancers = [middlewareEnhancer];
 
 const composedEnhancers =
-  process.env.NODE_ENV === 'development'
+  process.env.NODE_ENV !== 'production'
     ? composeWithDevTools({ trace: true, traceLimit: 25 })(...enhancers)
     : compose(...enhancers);
 
