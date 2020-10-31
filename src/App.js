@@ -1,19 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import HomePage from './pages/HomePage/HomePage';
-import ShopPage from './pages/ShopPage/ShopPage';
-import AuthPage from './pages/AuthPage/AuthPage';
-import CheckoutPage from './pages/CheckoutPage/CheckoutPage';
 import Header from './components/Header/Header';
+import Spinner from './components/UI/Spinner/Spinner';
+import ErrorBoundary from './hoc/ErrorBoundary/ErrorBoundary';
 
 import * as actions from './redux/actions/index';
 import { selectCurrentUser } from './redux/selectors/userSelectors';
 import { selectCartHidden } from './redux/selectors/cartSelectors';
 
 import './App.scss';
+
+const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
+const ShopPage = lazy(() => import('./pages/ShopPage/ShopPage'));
+const AuthPage = lazy(() => import('./pages/AuthPage/AuthPage'));
+const CheckoutPage = lazy(() => import('./pages/CheckoutPage/CheckoutPage'));
 
 const App = ({ currentUser, onSetCurrentUser }) => {
   useEffect(() => {
@@ -32,10 +35,14 @@ const App = ({ currentUser, onSetCurrentUser }) => {
     <div className="body">
       <Header />
       <Switch>
-        <Route path="/" exact component={HomePage} />
-        <Route path="/shop" component={ShopPage} />
-        <Route path="/auth" render={guardSignInRoute} />
-        <Route path="/checkout" component={CheckoutPage} />
+        <ErrorBoundary>
+          <Suspense fallback={<Spinner />}>
+            <Route path="/" exact component={HomePage} />
+            <Route path="/shop" component={ShopPage} />
+            <Route path="/auth" render={guardSignInRoute} />
+            <Route path="/checkout" component={CheckoutPage} />
+          </Suspense>
+        </ErrorBoundary>
       </Switch>
     </div>
   );
