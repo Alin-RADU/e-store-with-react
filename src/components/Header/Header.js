@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import CartDropdown from '../Cart/CartDropdown/CartDropdown';
+
 import { ReactComponent as Logo } from '../../assets/svg/crown.svg';
 import CartIcon from '../Cart/CartIcon/CartIcon';
-import CartDropdown from '../Cart/CartDropdown/CartDropdown';
 
 import { selectCurrentUser } from '../../redux/selectors/userSelectors';
 
