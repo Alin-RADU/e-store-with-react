@@ -1,6 +1,7 @@
 .custom-button {
   // min-width: 100px;
   width: 45%;
+  min-width: 160px;
   height: 50px;
   letter-spacing: 0.5px;
   line-height: 50px;
@@ -25,6 +26,10 @@
   &.google-sign-in {
     background-color: #4285f4;
     color: white;
+
+    @media screen and(max-width: 800px) {
+      margin-top: 10px;
+    }
 
     &:hover {
       background-color: #357ae8;
