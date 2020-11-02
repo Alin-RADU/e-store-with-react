@@ -6,4 +6,4 @@ export {
   clearItemCart,
   clearAllItemsFromCart,
 } from './cartAction';
-export { fetchCollectionsAsync } from './shopAction';
+export { fetchCollectionsAsync, clearCollections } from './shopAction';
