@@ -1,5 +1,3 @@
-import React from 'react';
-
 import SignIn from '../../components/Auth/SignIn/SignIn';
 import SignUp from '../../components/Auth/SignUp/SignUp';
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { auth, signInWithGoogle } from '../../../api/firebase/firebase';
 

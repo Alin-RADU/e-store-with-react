@@ -1,5 +1,3 @@
-import React from 'react';
-
 import './Button.scss';
 
 const Button = ({ children, isGoogleSignIn, inverted, ...otherProps }) => {

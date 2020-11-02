@@ -1,5 +1,3 @@
-import React from 'react';
-
 import './ErrorComponent.scss';
 
 const ErrorComponent = ({ hasError }) =>

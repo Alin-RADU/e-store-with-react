@@ -1,5 +1,3 @@
-import React from 'react';
-
 import './InputForm.scss';
 
 const InputForm = ({ label, handleChange, ...otherProps }) => {

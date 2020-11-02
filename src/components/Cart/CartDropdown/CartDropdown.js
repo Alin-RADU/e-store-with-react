@@ -1,4 +1,4 @@
-import React from 'react';
+import { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import CSSTransition from 'react-transition-group/CSSTransition';
@@ -39,10 +39,10 @@ const CartDropdown = ({ history, dispatch, showCartToggle }) => {
   };
 
   return (
-    <React.Fragment>
+    <Fragment>
       <Backdrop show={showCartToggle} />
       {renderCart()}
-    </React.Fragment>
+    </Fragment>
   );
 };
 
