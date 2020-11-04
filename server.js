@@ -19,7 +19,7 @@ app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
 app.use(cors());
 
-////////////////////
+//////////////////// setting to serve client
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client/build')));
 
