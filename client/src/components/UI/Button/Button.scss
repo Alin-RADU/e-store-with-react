@@ -17,6 +17,11 @@
   justify-content: center;
   cursor: pointer;
 
+  @media screen and(max-width: 800px) {
+    width: 80%;
+    margin: auto;
+  }
+
   &:hover {
     background-color: white;
     color: black;
